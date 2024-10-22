@@ -39,4 +39,17 @@ class DatabaseHelper {
     final db = await database;
     return await db.insert(tableNameField, user.toMap());
   }
+
+    Future<List<User>> getUsers() async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('users');
+
+    return List.generate(maps.length, (i) {
+      return User(
+        id: maps[i]['id'],
+        name: maps[i]['name'],
+        email: maps[i]['email'],
+      );
+    });
+  }
 }
