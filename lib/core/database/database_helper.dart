@@ -24,16 +24,19 @@ class DatabaseHelper {
       path,
       version: 1,
       onCreate: (db, version) {
-        return db.execute(
-        '''
+        return db.execute('''
         CREATE TABLE $tableNameField(
           $idField INTEGER PRIMARY KEY AUTOINCREMENT,
           $nameField TEXT,
           $emailField TEXT
         )
-        '''
-        );
+        ''');
       },
     );
+  }
+
+  Future<int> insertUser(User user) async {
+    final db = await database;
+    return await db.insert(tableNameField, user.toMap());
   }
 }
