@@ -40,7 +40,7 @@ class DatabaseHelper {
     return await db.insert(tableNameField, user.toMap());
   }
 
-    Future<List<User>> getUsers() async {
+  Future<List<User>> getUsers() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('users');
 
@@ -51,5 +51,14 @@ class DatabaseHelper {
         email: maps[i]['email'],
       );
     });
+  }
+
+  Future<int> deleteUser(int id) async {
+    final db = await database;
+    return await db.delete(
+      tableNameField,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 }
