@@ -17,4 +17,8 @@ class UserRepository {
   Future<int> updateUser(User user) async {
     return await databaseHelper.updateUser(user);
   }
+
+  Future<int> removeUser(int id) async {
+    return await databaseHelper.deleteUser(id);
+  }
 }
