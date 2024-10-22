@@ -1,3 +1,8 @@
+String tableNameField = 'users';
+String idField = 'id';
+String nameField = 'name';
+String emailField = 'email';
+
 class User {
   final int? id;
   final String name;
