@@ -9,4 +9,8 @@ class UserRepository {
   Future<int> addUser(User user) async {
     return await databaseHelper.insertUser(user);
   }
+
+  Future<List<User>> fetchUser() async {
+    return await databaseHelper.getUsers();
+  }
 }
