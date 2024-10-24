@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/features/user/data/models/user.dart';
+import 'package:flutter_application_1/features/user/model/user.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter_application_1/core/database/database_helper.dart';
-import 'package:flutter_application_1/features/user/data/models/user.dart';
+import 'package:flutter_application_1/features/user/model/user.dart';
 
 class UserRepository {
   final DatabaseHelper databaseHelper;

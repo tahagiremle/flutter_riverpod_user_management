@@ -1,6 +1,6 @@
 import 'package:flutter_application_1/core/database/database_helper.dart';
-import 'package:flutter_application_1/features/user/data/models/user.dart';
-import 'package:flutter_application_1/features/user/data/repositories/user_repository.dart';
+import 'package:flutter_application_1/features/user/repositories/user_repository.dart';
+import 'package:flutter_application_1/features/user/model/user.dart';
 import 'package:riverpod/riverpod.dart';
 
 final userProvider = StateNotifierProvider<UserNotifier, List<User>>((ref) {

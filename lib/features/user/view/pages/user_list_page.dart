@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_application_1/features/presentation/providers/user_provider.dart';
-import 'package:flutter_application_1/features/presentation/widgets/user_card.dart';
+import 'package:flutter_application_1/features/user/viewmodel/user_viewmodel.dart';
+import 'package:flutter_application_1/features/user/view/widgets/user_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserListPage extends ConsumerWidget {

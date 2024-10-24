@@ -11,7 +11,11 @@ class User {
   User({this.id, required this.name, required this.email});
 
   Map<String, dynamic> toMap() {
-    return {'id': id, 'name': name, "email": email};
+    return {
+      'id': id,
+      'name': name,
+      "email": email,
+    };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
