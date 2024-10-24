@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/features/user/model/user.dart';
 import 'package:flutter_application_1/features/user/view/widgets/edit_user_dialog.dart';
 import 'package:flutter_application_1/features/user/viewmodel/user_viewmodel.dart';
-import 'package:flutter_application_1/features/user/model/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UserCard extends ConsumerWidget {
@@ -29,12 +29,47 @@ class UserCard extends ConsumerWidget {
                 },
               );
             } else if (value == "delete") {
-              ref.read(userProvider.notifier).deleteUser(user.id!);
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Deletion confirmation'),
+                    content: Text(
+                        'Are you sure you want to delete the user named ${user.name}?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Cancel'),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            ref
+                                .read(userProvider.notifier)
+                                .deleteUser(user.id!);
+                            Navigator.of(context).pop();
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('${user.name} Deleted'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+
+                            ref.read(userProvider.notifier).loadUsers();
+                          },
+                          child: Text('Delete'))
+                    ],
+                  );
+                },
+              );
             }
           },
           itemBuilder: (context) {
             return ['edit', 'delete'].map((String choice) {
               return PopupMenuItem<String>(
+                value: choice,
                 child: Text(choice == 'edit' ? 'Edit' : 'Delete'),
               );
             }).toList();
@@ -44,4 +79,3 @@ class UserCard extends ConsumerWidget {
     );
   }
 }
-

@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_application_1/features/user/view/widgets/add_user_form.dart';
 import 'package:flutter_application_1/features/user/viewmodel/user_viewmodel.dart';
 import 'package:flutter_application_1/features/user/view/widgets/user_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class UserListPage extends ConsumerWidget {
+class UserListPage extends ConsumerStatefulWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _UserListPageState createState() => _UserListPageState();
+}
+
+class _UserListPageState extends ConsumerState<UserListPage> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(userProvider.notifier).loadUsers();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final users = ref.watch(userProvider);
 
     return Scaffold(
@@ -25,7 +37,15 @@ class UserListPage extends ConsumerWidget {
               },
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => AddUserForm(),
+          ).then((value) {
+            // Dialog kapandıktan sonra kullanıcıları yeniden yükle
+            ref.read(userProvider.notifier).loadUsers();
+          });
+        },
         child: Icon(Icons.add),
       ),
     );
